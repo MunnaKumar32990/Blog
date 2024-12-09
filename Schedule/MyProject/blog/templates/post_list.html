@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #ff7f50;
+            padding: 40px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        header h1 {
+            font-size: 3rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+        .create-post-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            color: #ff7f50;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .create-post-btn:hover {
+            background-color: #ff6347;
+            color: white;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        li:hover {
+            transform: translateY(-5px);
+            background-color: #f1f1f1;
+        }
+        .post-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .post-info {
+            font-size: 1rem;
+            color: #777;
+            margin-top: 10px;
+        }
+        .date {
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+        .post-description {
+            font-size: 1rem;
+            margin-top: 15px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Blog Posts</h1>
+        <a href="{% url 'post_create' %}" class="create-post-btn">Create New Post</a>
+    </header>
+
+    <div class="container">
+        <ul>
+            {% for post in posts %}
+                <li>
+                    <div class="post-title">{{ post.title }}</div>
+                    <div class="post-info">
+                        <p class="date">Posted on {{ post.created_at|date:"F d, Y" }}</p>
+                    </div>
+                    <div class="post-description">
+                        <p>{{ post.content|truncatewords:20 }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</body>
+</html>
